@@ -23,6 +23,7 @@ class Router:
         # 2.将Url与对应的控制器方法绑定
         # app_handler = AppHandler
         # bp.add_url_rule('/ping', view_func=app_handler.ping, methods=['GET'])
-        bp.add_url_rule('/ping', view_func=self.app_handler.ping, methods=['GET'])
+        bp.add_url_rule('/app/completion', view_func=self.app_handler.completion, methods=['POST'])
+        bp.add_url_rule('/ping', view_func=self.app_handler.ping)
 
         app.register_blueprint(bp)
