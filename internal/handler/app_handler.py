@@ -3,6 +3,7 @@ import os
 from flask import request, jsonify
 from openai import OpenAI
 from internal.schema.app_schema import CompletionsReq
+from pkg.response import success_json, validation_error_json
 
 
 class AppHandler:
@@ -17,17 +18,16 @@ class AppHandler:
         #         "msg": "JSON解析失败，请检查格式，使用双引号"
         #     }), 400
         req = CompletionsReq()
-        print(req)
         if not req.validate():
-            return jsonify({
-                "status": "error",
-                "code": 200,
-                "msg": req.errors
-            })
+            # return jsonify({
+            #     "status": "error",
+            #     "code": 200,
+            #     "msg": req.errors
+            # })
             # return req.errors, 200
-
+            return validation_error_json(req.errors)
         # query = request.json.get("query")
-
+        print(req.query.data)
         client = OpenAI()
 
         response = client.chat.completions.create(
@@ -37,8 +37,9 @@ class AppHandler:
                 {"role": "user", "content": req.query.data}
             ]
         )
-
-        return response.choices[0].message.content
+        content = response.choices[0].message.content
+        print('content==>', content)
+        return success_json({"content": content})
 
     def ping(self):
         return "pong 12345！"
