@@ -4,6 +4,7 @@ from flask import request, jsonify
 from openai import OpenAI
 from internal.schema.app_schema import CompletionsReq
 from pkg.response import success_json, validation_error_json
+from internal.exception import FailException
 
 
 class AppHandler:
@@ -38,8 +39,8 @@ class AppHandler:
             ]
         )
         content = response.choices[0].message.content
-        print('content==>', content)
         return success_json({"content": content})
 
     def ping(self):
+        raise FailException('数据异常')
         return "pong 12345！"

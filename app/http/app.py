@@ -11,4 +11,4 @@ dotenv.load_dotenv()
 app = Http(__name__, conf=config, router=injector.get(Router))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=7001)
