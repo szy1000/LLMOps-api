@@ -1,3 +1,5 @@
-from .app import app
+# -*- coding: utf-8 -*-
 
-__all__ = ["app"]
+# from .app import app
+
+# __all__ = ["app"]
