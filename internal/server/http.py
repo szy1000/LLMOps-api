@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_migrate import Migrate
 
 from internal.router import Router
 from config import Config
@@ -18,7 +19,15 @@ class Http(Flask):
 
     # args 非命名参数
     # **kwargs 命名参数
-    def __init__(self, *args, conf: Config, db: SQLAlchemy, router: Router, **kwargs):
+    def __init__(
+            self,
+            *args,
+            conf: Config,
+            db: SQLAlchemy,
+            migrate: Migrate,
+            router:
+            Router, **kwargs
+    ):
         # 1.调用父类构造函数初始化
         super().__init__(*args, **kwargs)
 
@@ -30,10 +39,11 @@ class Http(Flask):
 
         # 4.初始化flask扩展开
         db.init_app(self)
+        migrate.init_app(self, db, directory='internal/migrations')
 
-        with self.app_context():
-            # _ = App()
-            db.create_all()
+        # with self.app_context():
+        #      _ = App()
+        #      db.create_all()
 
         # 5.注册路由
         router.register_router(self)
