@@ -1,5 +1,6 @@
 import dotenv
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
+from pkg.sqlalchemy import SQLAlchemy
 from injector import Injector
 
 from internal.router import Router

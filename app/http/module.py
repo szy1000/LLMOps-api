@@ -7,7 +7,8 @@
 """
 from internal.extension.database_extension import db
 from injector import Module, Binder
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
+from pkg.sqlalchemy import SQLAlchemy
 
 
 class ExtensionModule(Module):

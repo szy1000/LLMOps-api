@@ -7,7 +7,9 @@ from config import Config
 
 from internal.exception import CustomException
 from pkg.response import Response, json, HttpCode, message
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
+
+from pkg.sqlalchemy import SQLAlchemy
 from internal.model import App
 
 
